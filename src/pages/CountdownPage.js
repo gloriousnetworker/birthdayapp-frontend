@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CountdownPage() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [isCountdownOver, setIsCountdownOver] = useState(false);
   const navigate = useNavigate();
 
   // Calculate the time left until your birthday
@@ -21,46 +22,70 @@ function CountdownPage() {
         setTimeLeft({ days, hours, minutes, seconds });
       } else {
         clearInterval(countdown);
+        setIsCountdownOver(true); // Countdown is over
       }
     }, 1000);
 
     return () => clearInterval(countdown);
   }, []);
 
+  // Handler for adding wish/message
+  const handleAddWish = () => {
+    if (!isCountdownOver) {
+      alert('04 SEPTEMBER IS THE DATE! Please come back then to add your wish/message.');
+    } else {
+      navigate('/add-wish');
+    }
+  };
+
+  // Handler for navigating to the album page
+  const handleGoToAlbum = () => {
+    navigate('/album');
+  };
+
   return (
     <div
-      className="flex items-center justify-center h-screen bg-cover bg-center"
+      className="flex items-center justify-center h-screen bg-cover bg-center p-4"
       style={{ backgroundImage: "url('/cake.jpg')" }} // Background image from public folder
     >
-      <div className="bg-white bg-opacity-75 p-8 rounded shadow-md text-center">
-        <h1 className="text-4xl font-bold mb-6">Countdown to My Birthday!</h1>
+      <div className="bg-white bg-opacity-75 p-6 rounded shadow-md text-center w-full max-w-md">
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Countdown to My Birthday!</h1>
         
         {/* Countdown Box */}
-        <div className="grid grid-cols-4 gap-4 mb-6">
-          <div className="p-4 bg-blue-200 rounded-lg">
-            <p className="text-lg font-bold">{timeLeft.days}</p>
-            <p>Days</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="p-2 md:p-4 bg-blue-200 rounded-lg">
+            <p className="text-base md:text-lg font-bold">{timeLeft.days}</p>
+            <p className="text-sm md:text-base">Days</p>
           </div>
-          <div className="p-4 bg-green-200 rounded-lg">
-            <p className="text-lg font-bold">{timeLeft.hours}</p>
-            <p>Hours</p>
+          <div className="p-2 md:p-4 bg-green-200 rounded-lg">
+            <p className="text-base md:text-lg font-bold">{timeLeft.hours}</p>
+            <p className="text-sm md:text-base">Hours</p>
           </div>
-          <div className="p-4 bg-yellow-200 rounded-lg">
-            <p className="text-lg font-bold">{timeLeft.minutes}</p>
-            <p>Minutes</p>
+          <div className="p-2 md:p-4 bg-yellow-200 rounded-lg">
+            <p className="text-base md:text-lg font-bold">{timeLeft.minutes}</p>
+            <p className="text-sm md:text-base">Minutes</p>
           </div>
-          <div className="p-4 bg-red-200 rounded-lg">
-            <p className="text-lg font-bold">{timeLeft.seconds}</p>
-            <p>Seconds</p>
+          <div className="p-2 md:p-4 bg-red-200 rounded-lg">
+            <p className="text-base md:text-lg font-bold">{timeLeft.seconds}</p>
+            <p className="text-sm md:text-base">Seconds</p>
           </div>
         </div>
 
         {/* Button to navigate to add wish page */}
         <button
-          onClick={() => navigate('/add-wish')}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleAddWish}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 ${!isCountdownOver ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={!isCountdownOver}
         >
           Click to Add Birthday Wish/Message
+        </button>
+
+        {/* Button to navigate to album page */}
+        <button
+          onClick={handleGoToAlbum}
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Go to Album Page
         </button>
       </div>
     </div>

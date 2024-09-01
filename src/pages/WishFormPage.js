@@ -1,11 +1,13 @@
 // src/pages/WishFormPage.js
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 function WishFormPage() {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate(); // Initialize the navigation hook
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -29,9 +31,9 @@ function WishFormPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-1/2">
-        <h1 className="text-2xl font-bold mb-4">Add Your Birthday Wish</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+      <div className="bg-white p-6 md:p-8 rounded shadow-md w-full max-w-md md:max-w-lg">
+        <h1 className="text-2xl font-bold mb-4 text-center">Add Your Birthday Wish</h1>
         <form onSubmit={handleSubmit}>
           {/* Name Input */}
           <div className="mb-4">
@@ -65,7 +67,7 @@ function WishFormPage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
           >
             Submit Wish
           </button>
@@ -76,20 +78,31 @@ function WishFormPage() {
 
         {/* Appreciation Modal */}
         {showModal && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-8 rounded shadow-md w-1/2 text-center">
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
+            <div className="bg-white p-6 rounded shadow-md w-full max-w-md md:max-w-lg max-h-[90vh] overflow-auto">
               <h2 className="text-2xl font-bold mb-4">Dear {name || 'Friend'},</h2>
               <p className="mb-4">
                 Thank you for the wonderful birthday wishes! I'm so grateful for God's faithfulness this past year; it has been incredibly productive. I'm excited to share that the app you're using to send your messages was designed by me, with the hope of receiving your love and support. Your kindness means the world to me, and I'm blessed to have a friend like you.
               </p>
               <p className="font-bold mb-4">With heartfelt thanks,</p>
               <p className="font-bold">Glorious Udofot (Udofot.tsx)</p>
-              <button
-                className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => setShowModal(false)}
-              >
-                Close
-              </button>
+              <div className="flex space-x-4">
+                {/* Close Button */}
+                <button
+                  className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+                  onClick={() => setShowModal(false)}
+                >
+                  Close
+                </button>
+
+                {/* Album Button */}
+                <button
+                  className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full"
+                  onClick={() => navigate('/album')}
+                >
+                  Album
+                </button>
+              </div>
             </div>
           </div>
         )}
