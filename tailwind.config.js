@@ -4,14 +4,14 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        slideInOut: 'slideInOut 5s linear infinite',
+        slideInOut: 'slideInOut 10s linear infinite', // Increased duration for slower animation
       },
       keyframes: {
         slideInOut: {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },
-          '30%': { transform: 'translateX(0)', opacity: '1' },
-          '70%': { transform: 'translateX(0)', opacity: '1' },
-          '100%': { transform: 'translateX(100%)', opacity: '0' },
+          '10%': { transform: 'translateX(0)', opacity: '1' }, // Slide in and become visible
+          '60%': { transform: 'translateX(0)', opacity: '1' }, // Stay visible for 5 seconds
+          '100%': { transform: 'translateX(100%)', opacity: '0' }, // Slide out
         },
       },
       colors: {

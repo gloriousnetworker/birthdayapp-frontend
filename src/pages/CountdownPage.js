@@ -1,4 +1,3 @@
-// src/pages/CountdownPage.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -45,9 +44,12 @@ function CountdownPage() {
 
   return (
     <div
-      className="flex items-center justify-center h-screen bg-cover bg-center p-4"
+      className="flex flex-col items-center justify-center h-screen bg-cover bg-center p-4 relative"
       style={{ backgroundImage: "url('/cake.jpg')" }} // Background image from public folder
     >
+      {/* Animated Header */}
+      <AnimatedHeader />
+
       <div className="bg-white bg-opacity-75 p-6 rounded shadow-md text-center w-full max-w-md">
         <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Countdown to My Birthday!</h1>
         
@@ -88,6 +90,15 @@ function CountdownPage() {
           Go to Album Page
         </button>
       </div>
+    </div>
+  );
+}
+
+// Animated Header Component
+function AnimatedHeader() {
+  return (
+    <div className="w-full bg-blue-600 text-white py-2 text-center text-lg font-semibold animate-slideInOut">
+      Do you love what you see? 8024983733 Moniepoint 😁😊❤
     </div>
   );
 }
