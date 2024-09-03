@@ -51,7 +51,8 @@ function CountdownPage() {
       <AnimatedHeader />
 
       <div className="bg-white bg-opacity-75 p-6 rounded shadow-md text-center w-full max-w-md">
-        <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Countdown to My Birthday!</h1>
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">🎉🎂 Happy Birthday to Me! 🎂🎉
+        </h1>
         
         {/* Countdown Box */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
